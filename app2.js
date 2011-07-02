@@ -1,13 +1,19 @@
 (function() {
-  var RedisStore, app, express;
+  var REDIS, RedisStore, app, express, uri;
   express = require('express');
   RedisStore = require('connect-redis')(express);
+  uri = URI.parse(ENV["REDISTOGO_URL"]);
+  REDIS = {
+    host: uri.host,
+    port: uri.port,
+    password: uri.password
+  };
   app = express.createServer();
   app.use(express.static(__dirname + '/public'));
   app.use(express.cookieParser());
   app.use(express.session({
     secret: "Coffeebreak",
-    store: new RedisStore,
+    store: new RedisStore(REDIS),
     cookie: {
       maxAge: 60000
     }
