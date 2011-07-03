@@ -5,5 +5,7 @@
   , "dependencies": {
       "express": "2.4.0"
     , "jade": ">= 0.0.1"
+    , "connect-redis": ">= 0.0.1"
+    , "redis": ">= 0.0.1"
   }
 }
