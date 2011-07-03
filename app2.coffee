@@ -9,6 +9,9 @@ app = express.createServer()
 # Setup configuration
 app.use express.static(__dirname + '/public')
 app.use express.cookieParser()
+
+express.logger(process.env.REDISTOGO_URL)
+
 app.use express.session {
   secret: "Coffeebreak"
   store: new RedisStore({url: process.env.REDISTOGO_URL})
