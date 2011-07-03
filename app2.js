@@ -22,5 +22,5 @@
       title: request.session.views + ': Express with Coffee and sessions'
     });
   });
-  app.listen(3000);
+  app.listen(process.env.PORT || 3000);
 }).call(this);

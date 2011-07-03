@@ -25,5 +25,5 @@ app.get '/', (request, response) ->
   response.render 'index', { title: request.session.views + ': Express with Coffee and sessions' }
 
 # Listen
-app.listen 3000
+app.listen (process.env.PORT || 3000)
 #console.log "Express22 server listening on port %d", app.address().port
