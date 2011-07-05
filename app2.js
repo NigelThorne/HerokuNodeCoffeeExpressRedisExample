@@ -1,15 +1,19 @@
 (function() {
-  var RedisStore, app, express;
+  var RedisStore, app, express, red_hash, redis_url;
   express = require('express');
   RedisStore = require('connect-redis')(express);
   app = express.createServer();
   app.use(express.static(__dirname + '/public'));
   app.use(express.cookieParser());
-  express.logger(process.env.REDISTOGO_URL);
+  redis_url = process.env.REDISTOGO_URL;
+  red_hash = {
+    url: redis_url
+  };
+  express.logger('************* ' + redis_url);
   app.use(express.session({
     secret: "Coffeebreak",
     store: new RedisStore({
-      url: process.env.REDISTOGO_URL
+      url: redis_url
     }),
     cookie: {
       maxAge: 60000

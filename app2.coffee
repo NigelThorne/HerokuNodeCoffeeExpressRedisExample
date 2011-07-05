@@ -1,8 +1,6 @@
 express = require('express')
 
-
 RedisStore = require('connect-redis')(express)
-#uri = URI.parse(ENV["REDISTOGO_URL"])
 
 app = express.createServer()
  
@@ -10,11 +8,13 @@ app = express.createServer()
 app.use express.static(__dirname + '/public')
 app.use express.cookieParser()
 
-express.logger(process.env.REDISTOGO_URL)
+redis_url = process.env.REDISTOGO_URL
+red_hash = {url: redis_url}
+express.logger('************* '+ redis_url)
 
 app.use express.session {
   secret: "Coffeebreak"
-  store: new RedisStore({url: process.env.REDISTOGO_URL})
+  store: new RedisStore({url: redis_url})
   cookie: { maxAge: 60000}
 }
 app.set 'view engine', 'jade'
