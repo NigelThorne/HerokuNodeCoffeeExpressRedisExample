@@ -2,9 +2,7 @@ express = require('express')
 
 RedisStore = require('connect-redis')(express)
 rtg   = require("url").parse(process.env.REDISTOGO_URL)
-redis = require("redis").createClient(rtg.port, rtg.hostname)
 
-redis.auth(rtg.auth.split(":")[1])
 app = express.createServer()
  
 # Setup configuration
@@ -15,7 +13,7 @@ redis_url = process.env.REDISTOGO_URL
 
 app.use express.session {
   secret: "Coffeebreak"
-  store: new RedisStore(redis)
+  store: new RedisStore({port: rtg.port, host: rtg.hostname, pass:rtg.auth.split(":")[1]})
   cookie: { maxAge: 60000}
 }
 app.set 'view engine', 'jade'
