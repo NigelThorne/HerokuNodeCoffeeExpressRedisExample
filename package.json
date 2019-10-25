@@ -3,7 +3,7 @@
   , "version": "0.0.1"
   , "private": true
   , "dependencies": {
-      "express": "2.4.0"
+      "express": "4.17.1"
     , "jade": ">= 0.0.1"
     , "connect-redis": ">= 0.0.1"
     , "redis": ">= 0.0.1"
